@@ -18,11 +18,22 @@
       <span class="font-hairline">Showing results for</span>
         "{{ searchItem }}"
       </h1>
-       <div v-if="searchItem && heroes.length > 0" class="w-full flex-1 flex-warp"> 
+      <button @click="sortList(heroName)" >Sort list</button>
+       <div v-if="searchItem && heroes.length > 0" class="w-full flex flex-wrap overflow-y-auto"> 
         <Card 
-          class="sm:1/2 md:1/2 lg:w-1/4 xl:w-1/4 p-2" 
+          class="sm:w-1/4 md:w-1/4 lg:w-1/4 xl:w-1/4 p-2" 
           v-for="hero in heroes" 
           :key="hero.id" 
+          :hero="hero"
+        />
+       </div> 
+
+       <div v-else-if="heroes.length > 0" class="w-full flex flex-wrap overflow-y-auto"> 
+        <Card 
+          class="sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 p-2"
+          v-for="hero in heroes.slice(1, 11)" 
+          :key="hero.id" 
+          :hero="hero"
         />
        </div> 
     </div>
@@ -37,18 +48,36 @@ export default {
   components : {
     Card,
   },
+  data() {
+    return {
+      someHeroes: 'spider',
+      heroName: this.$store.getters.getHeroesName
+    }
+  },
   computed: {
     searchItem() {
       return this.$store.getters.getSearchItem    
       },
     heroes() {
       return this.$store.getters.getHeroes 
+    },
+    fetchData(someHeroes) {
+      console.log(someHeroes._data.someHeroes);
+      // heroes();
+      return this.$store.commit("addHeroes", someHeroes._data.someHeroes);
     }
   },
   methods: {
     setSearchItem(event) {
       this.$store.dispatch('setSearchItem', event.target.value);
-    }
+    },
+    sortList(heroName) {
+      console.log(heroName)
+        }
+  },
+  mounted: function () {
+    this.fetchData;
+    this.heroes;
   }
 };
 </script>

@@ -8,7 +8,7 @@
                 <div class="pb-5/6">
                     <img 
                         class="h-full w-full object-cover rounded-lg shadow-md"
-                        src="https://via.placeholder.com/800x600.png?text=Hello+there" 
+                        :src="hero.image.url" 
                         alt="Hero">
                 </div>
             </div>
@@ -16,10 +16,10 @@
                 <div class="bg-white p-6 rounded-lg shadow-lg">
                     <h4 
                     class="mt-1 font-hairline text-3xl text-gray-900 leading-tight truncate">
-                        Hero Name
+                        {{hero.name}}
                     </h4>
                     <div class="mt-1">
-                        Description
+                        {{ hero.name}}
                     </div>
                     <div class="flex items-baseline mt-4"> 
                         <span
@@ -40,5 +40,11 @@
 <script>
 export default {
     name: 'Card',
+    props: {
+        hero: {
+            type: Object,
+            default: () => {}
+        }
+    }
 }
 </script>

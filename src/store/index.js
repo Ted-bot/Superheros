@@ -22,7 +22,15 @@ export default new Vuex.Store({
     settingHeroes: (state, heroes) => (state.heroes = heroes),
     settingSearchItem: (state, searchItem) => (state.searchItem = searchItem),
     changingLoading: (state, status) => (state.loading = status),
-    changingNotFound: (state, status) => (state.notFound = status)
+    changingNotFound: (state, status) => (state.notFound = status),
+    //get state and var someHeroes, push data from someHeroes to state
+    addHeroes: async (state, someHeroes) => {
+      //search for someHeroes and put in numberHeroes
+      const numberHeroes = await search(someHeroes)   
+      //change value numberHeroes in state heroes   
+      // state.heroes.push(numberHeroes.data.results)
+      state.heroes = numberHeroes.data.results
+    }    
   },
   actions: {
     setHeroes: ({ commit}, data) => commit('settingHeroes', data),
@@ -36,7 +44,8 @@ export default new Vuex.Store({
         : dispatch("changeNotFound", true) && dispatch('setHeroes', [])
     },
     changeLoading: ({ commit}, status) => commit('changingLoading', status),
-    changeNotFound: ({ commit}, status) => commit('changeNotFound', status)
+    changeNotFound: ({ commit}, status) => commit('changeNotFound', status),
+    
   },
   modules: {}
 });

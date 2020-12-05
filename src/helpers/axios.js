@@ -6,3 +6,5 @@ const api = axios.create({
 
 //export as function
 export const search = searchItem => api(`search/${searchItem}`)
+
+export const get = searchItem => api(`id/${searchItem}`)
