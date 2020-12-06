@@ -7,7 +7,7 @@ const api = axios.create({
 const heroesJSON = axios.get(
         'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/all.json'
     ).then(response =>{
-        console.log(response.data);
+        // console.log(response.data);
         return response.data;
 
 })

@@ -7,12 +7,14 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     heroes: [],
+    singleHero: [],
     searchItem: "",
     loading: false,
     notFound: false,
   },
   getters: {
     getHeroes: state => state.heroes,
+    getSingleHero: state => state.singleHero,
     getHero: state => id => state.heroes.find(hero => hero.id === id),
     getSearchItem: state => state.searchItem,
     isLoading: state => state.loading,
@@ -48,15 +50,18 @@ export default new Vuex.Store({
       heroName = heroesName;
       console.log(heroName);
       // return heroName;
-      state.heroes = heroName;
-      
+      state.heroes = heroName;      
     }
     ,
-    randomHeroes: async (state, heroes) => {
+    allHeroes: async (state, heroes) => {
       heroes = await get;
       state.heroes = heroes;
+      let countHeroes = Math.floor(Math.random() * heroes.length);
+      // console.log(countHeroes);
+      let selectedHero = heroes[countHeroes];
+      // state.heroes = heroes;
+      state.singleHero = selectedHero;
     }
-    
   },
   actions: {
     setHeroes: ({ commit}, data) => commit('settingHeroes', data),
@@ -68,6 +73,10 @@ export default new Vuex.Store({
       heroes.data?.results
         ? dispatch("setHeroes", heroes.data.results)
         : dispatch("changeNotFound", true) && dispatch('setHeroes', [])
+    },
+    getRandomHero: ({commit}, randomName) => {
+        commit('allHeroes', randomName)
+
     },
     changeLoading: ({ commit}, status) => commit('changingLoading', status),
     changeNotFound: ({ commit}, status) => commit('changeNotFound', status),    

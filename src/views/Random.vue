@@ -1,56 +1,65 @@
 <template>
     <div>
-        <h1>Push the Button to get Random Hero</h1>
-        <!-- <button 
+        <h1>Random Hero</h1>
+        <button 
             class="bg-green-300 hover:bg-green-500 rounded font-bold py-2 px-4 rounded" 
-            @click="randomHero"
+            @click="put"
             >
                 Get Random Hero            
-        </button> -->
-        <div>
-            Random Hero
-             <!-- <div class="p-8 flex flex-wrap">
+        </button>
+        <!-- <div> -->
+            <div class="p-8 flex flex-wrap">
                 <div class="left w-full h-full md:w-1/4">
-                <h1 class="w-full text-white text-2xl font-hairline pb-2">{{hero.name}}</h1>
-                <img 
-                :src="hero.image.url" 
-                alt="hero.name"
-                class="object-contain mb-4 rounded"
-                >
-                </div>        
+                    <h1 class="w-full text-white text-2xl font-hairline pb-2">{{heroes.name}}</h1>
+                    <img 
+                        :src="heroes.images"
+                        alt="heroes.name"
+                        :key="heroes.id"
+                        class="object-contain mb-4 rounded"
+                        >
+                </div>
                 <div class="right w-full md:w-3/4 md:pl-4">
-                    <Table class="" :content="hero.powerstats" title="Power Stats" />
-                    <Table class="" :content="hero.biography" title="Biography" />
-                </div> -->
+                    <Table class="" :content="heroes.powerstats" title="Power Stats" />
+                    <Table class="" :content="heroes.biography" title="Biography" />
+                </div>
             </div>
     </div>
 </template>
 
 <script>
+import Table from '@/components/Table.vue';
 
 export default {
     name: 'HeroRandom',
+    components: {
+        Table,
+    },
     data() {
         return {
-            heroes: []
+            heroes: this.$store.getters.getSingleHero,
         }
     },
     computed: {
-        randomHero(heroes){
-            console.log(heroes);
-            // return data;
-            return this.$store.commit('randomHeroes', heroes)
+        //make api request and push to state heroes
+        start(heroes){
+            return this.$store.commit('allHeroes', heroes)
+        }
+        ,
+        //get state heroes
+        randomHero(){
+            // this.start;            
+            return this.$store.state.singleHero
         }
     },
     methods: {
-        pushHeroes() {
-            let heroesObjects = this.heroes;
-            console.log(heroesObjects);
+        put(x){
+            console.log(this.hero);
+            this.heroes = x;
         },
-        
     },
     mounted: function () {
-        this.randomHero
+        this.start;
+        this.randomHero;        
   } 
 }
 </script>
