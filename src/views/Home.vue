@@ -18,7 +18,7 @@
       <span class="font-hairline">Showing results for</span>
         "{{ searchItem }}"
       </h1>
-      <button @click="sortList(heroName)" >Sort list</button>
+      <button @click="sortList()" >Sort list</button>
        <div v-if="searchItem && heroes.length > 0" class="w-full flex flex-wrap overflow-y-auto"> 
         <Card 
           class="sm:w-1/4 md:w-1/4 lg:w-1/4 xl:w-1/4 p-2" 
@@ -50,8 +50,7 @@ export default {
   },
   data() {
     return {
-      someHeroes: 'spider',
-      heroName: this.$store.getters.getHeroesName
+      someHeroes: 'spider'
     }
   },
   computed: {
@@ -71,8 +70,12 @@ export default {
     setSearchItem(event) {
       this.$store.dispatch('setSearchItem', event.target.value);
     },
-    sortList(heroName) {
-      console.log(heroName)
+    sortList() {
+      // const list = this.heroes;     
+      // list.sort();
+      // console.log(list);
+      let heroesObjects = this.heroes;
+      this.$store.commit('sortHeroes', heroesObjects);
         }
   },
   mounted: function () {

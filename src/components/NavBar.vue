@@ -7,11 +7,26 @@
           <span class="font-light">Explorer</span>
       </span>
       </router-link>
+
+      <div class="flex float right">
+          <router-link 
+            class="bg-green-300 hover:bg-green-500 rounded font-bold py-2 px-4 rounded" 
+            to="/"
+            >
+            categories
+            </router-link>
+          <router-link 
+            class="bg-green-100 hover:bg-green-500 rounded font-bold py-2 px-4 rounded" 
+            to="/random"
+            >
+            Random
+            </router-link>
+      </div>
   </nav>
 </template>
 
 <script>
 export default {
-    name: 'NavBar',
+    name: 'NavBar'
 }
 </script>

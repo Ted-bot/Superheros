@@ -30,7 +30,33 @@ export default new Vuex.Store({
       //change value numberHeroes in state heroes   
       // state.heroes.push(numberHeroes.data.results)
       state.heroes = numberHeroes.data.results
-    }    
+    },
+    sortHeroes: (state, heroName) => {
+      // put hero name in const heroesName
+      const heroesName = heroName
+      // use sortfunction on heroesName to compare object
+      heroesName.sort((a,b) => {
+        let compare = 0;
+            if (a.id > b.id) {
+              // console.log('name:' + a.id);
+                compare = -1;
+            } else if (b.id > a.id) {
+                compare = 1;
+            }
+            return compare;
+      });
+      heroName = heroesName;
+      console.log(heroName);
+      // return heroName;
+      state.heroes = heroName;
+      
+    },
+    randomHeroes: (state, random) => {
+      const heroes = random;
+      const hond = Math.floor(Math.random() * Math.floor(heroes.length));
+      return hond;
+    }
+    
   },
   actions: {
     setHeroes: ({ commit}, data) => commit('settingHeroes', data),
@@ -44,8 +70,7 @@ export default new Vuex.Store({
         : dispatch("changeNotFound", true) && dispatch('setHeroes', [])
     },
     changeLoading: ({ commit}, status) => commit('changingLoading', status),
-    changeNotFound: ({ commit}, status) => commit('changeNotFound', status),
-    
+    changeNotFound: ({ commit}, status) => commit('changeNotFound', status),    
   },
   modules: {}
 });

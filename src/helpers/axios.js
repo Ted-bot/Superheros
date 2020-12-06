@@ -5,6 +5,7 @@ const api = axios.create({
 })
 
 //export as function
+// const search is function called searchItem that takes a value for the api func
 export const search = searchItem => api(`search/${searchItem}`)
 
-export const get = searchItem => api(`id/${searchItem}`)
+// export const get = comicHeroes => ;
