@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { search } from "../helpers/axios";
+import { search, get } from "../helpers/axios";
 
 Vue.use(Vuex);
 
@@ -50,11 +50,11 @@ export default new Vuex.Store({
       // return heroName;
       state.heroes = heroName;
       
-    },
-    randomHeroes: (state, random) => {
-      const heroes = random;
-      const hond = Math.floor(Math.random() * Math.floor(heroes.length));
-      return hond;
+    }
+    ,
+    randomHeroes: async (state, heroes) => {
+      heroes = await get;
+      state.heroes = heroes;
     }
     
   },

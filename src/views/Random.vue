@@ -1,12 +1,12 @@
 <template>
     <div>
         <h1>Push the Button to get Random Hero</h1>
-        <button 
+        <!-- <button 
             class="bg-green-300 hover:bg-green-500 rounded font-bold py-2 px-4 rounded" 
-            @click="getRandom(heroes)"
+            @click="randomHero"
             >
                 Get Random Hero            
-        </button>
+        </button> -->
         <div>
             Random Hero
              <!-- <div class="p-8 flex flex-wrap">
@@ -30,30 +30,27 @@
 
 export default {
     name: 'HeroRandom',
-    // data() {
-    //     return {
-    //         arrayHeroes: []
-    //     }
-    // },
+    data() {
+        return {
+            heroes: []
+        }
+    },
     computed: {
-        heroes() {
-            return this.$store.getters.getHeroes 
-        },
+        randomHero(heroes){
+            console.log(heroes);
+            // return data;
+            return this.$store.commit('randomHeroes', heroes)
+        }
     },
     methods: {
         pushHeroes() {
             let heroesObjects = this.heroes;
             console.log(heroesObjects);
-
         },
-        getRandom(data){
-            console.log(data);
-            return data;
-            // return this.$store.commit('randomHeroes', data)
-        }
+        
     },
     mounted: function () {
-        
+        this.randomHero
   } 
 }
 </script>
