@@ -61,8 +61,7 @@ export default {
       return this.$store.getters.getHeroes 
     },
     fetchData(someHeroes) {
-      console.log(someHeroes._data.someHeroes);
-      // heroes();
+      // console.log(someHeroes._data.someHeroes);
       return this.$store.commit("addHeroes", someHeroes._data.someHeroes);
     }
   },
@@ -71,9 +70,6 @@ export default {
       this.$store.dispatch('setSearchItem', event.target.value);
     },
     sortList() {
-      // const list = this.heroes;     
-      // list.sort();
-      // console.log(list);
       let heroesObjects = this.heroes;
       this.$store.commit('sortHeroes', heroesObjects);
         }

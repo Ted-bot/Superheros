@@ -11,6 +11,7 @@ export default new Vuex.Store({
     searchItem: "",
     loading: false,
     notFound: false,
+    selectedHero: {}
   },
   getters: {
     getHeroes: state => state.heroes,
@@ -40,7 +41,6 @@ export default new Vuex.Store({
       heroesName.sort((a,b) => {
         let compare = 0;
             if (a.id > b.id) {
-              // console.log('name:' + a.id);
                 compare = -1;
             } else if (b.id > a.id) {
                 compare = 1;
@@ -49,21 +49,19 @@ export default new Vuex.Store({
       });
       heroName = heroesName;
       console.log(heroName);
-      // return heroName;
       state.heroes = heroName;      
-    }
-    ,
-    allHeroes: async (state, heroes) => {
+    },
+    randomHero: async (state, heroes) => {
       heroes = await get;
       state.heroes = heroes;
       let countHeroes = Math.floor(Math.random() * heroes.length);
       // console.log(countHeroes);
-      let selectedHero = heroes[countHeroes];
-      // state.heroes = heroes;
-      state.singleHero = selectedHero;
+      state.selectedHero = state.heroes[countHeroes];
+      state.singleHero = state.selectedHero;
     }
   },
   actions: {
+    getNewRandomHero: ({commit}) => commit('randomHero'),
     setHeroes: ({ commit}, data) => commit('settingHeroes', data),
     setSearchItem: async ({commit, dispatch}, searchItem) => {
       commit('settingSearchItem', searchItem)
@@ -81,5 +79,5 @@ export default new Vuex.Store({
     changeLoading: ({ commit}, status) => commit('changingLoading', status),
     changeNotFound: ({ commit}, status) => commit('changeNotFound', status),    
   },
-  modules: {}
+  // modules: {}
 });

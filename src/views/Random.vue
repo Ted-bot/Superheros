@@ -1,26 +1,26 @@
 <template>
-    <div>
+    <div class="mt-2">
         <h1>Random Hero</h1>
         <button 
             class="bg-green-300 hover:bg-green-500 rounded font-bold py-2 px-4 rounded" 
-            @click="put"
+            @click="putNewHero"
             >
                 Get Random Hero            
         </button>
         <!-- <div> -->
             <div class="p-8 flex flex-wrap">
                 <div class="left w-full h-full md:w-1/4">
-                    <h1 class="w-full text-white text-2xl font-hairline pb-2">{{heroes.name}}</h1>
+                    <h1 class="w-full text-white text-2xl font-hairline pb-2">{{hero.name}}</h1>
                     <img 
-                        :src="heroes.images"
-                        alt="heroes.name"
-                        :key="heroes.id"
+                        :src="`https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/${hero.slug}.jpg`"
+                        alt="hero.name"
+                        :key="hero.id"
                         class="object-contain mb-4 rounded"
                         >
                 </div>
                 <div class="right w-full md:w-3/4 md:pl-4">
-                    <Table class="" :content="heroes.powerstats" title="Power Stats" />
-                    <Table class="" :content="heroes.biography" title="Biography" />
+                    <Table class="" :content="hero.powerstats" title="Power Stats" />
+                    <Table class="" :content="hero.biography" title="Biography" />
                 </div>
             </div>
     </div>
@@ -34,36 +34,28 @@ export default {
     components: {
         Table,
     },
-    data() {
-        return {
-            heroes: this.$store.getters.getSingleHero,
-        }
-    },
     computed: {
-        //make api request and push to state heroes
-        start(heroes){
-            return this.$store.commit('allHeroes', heroes)
-        }
-        ,
-        //get state heroes
-        randomHero(){
-            // this.start;            
+        hero(){ 
+            return this.$store.getters.getSingleHero
+        },
+        //make api request and push to state hero
+        start(){
+            return this.$store.commit('randomHero')
+        },
+        //get state hero
+        randomHero(){          
             return this.$store.state.singleHero
         }
     },
     methods: {
-        put(x){
-            console.log(this.hero);
-            this.heroes = x;
+        putNewHero(){
+            console.log("Hi there");
+            return this.$store.commit('randomHero')
         },
     },
-    mounted: function () {
+    created: function () {
         this.start;
         this.randomHero;        
   } 
 }
 </script>
-
-<style>
-
-</style>
