@@ -19,7 +19,7 @@ export default new Vuex.Store({
     getHero: state => id => state.heroes.find(hero => hero.id === id),
     getSearchItem: state => state.searchItem,
     isLoading: state => state.loading,
-    getNotFound: state => state.notFound,
+    getNotFound: state => state.notFound
   },
   mutations: {
     settingHeroes: (state, heroes) => (state.heroes = heroes),
@@ -29,27 +29,27 @@ export default new Vuex.Store({
     //get state and var someHeroes, push data from someHeroes to state
     addHeroes: async (state, someHeroes) => {
       //search for someHeroes and put in numberHeroes
-      const numberHeroes = await search(someHeroes)   
-      //change value numberHeroes in state heroes   
+      const numberHeroes = await search(someHeroes);
+      //change value numberHeroes in state heroes
       // state.heroes.push(numberHeroes.data.results)
-      state.heroes = numberHeroes.data.results
+      state.heroes = numberHeroes.data.results;
     },
     sortHeroes: (state, heroName) => {
       // put hero name in const heroesName
-      const heroesName = heroName
+      const heroesName = heroName;
       // use sortfunction on heroesName to compare object
-      heroesName.sort((a,b) => {
+      heroesName.sort((a, b) => {
         let compare = 0;
-            if (a.id > b.id) {
-                compare = -1;
-            } else if (b.id > a.id) {
-                compare = 1;
-            }
-            return compare;
+        if (a.id > b.id) {
+          compare = -1;
+        } else if (b.id > a.id) {
+          compare = 1;
+        }
+        return compare;
       });
       heroName = heroesName;
       console.log(heroName);
-      state.heroes = heroName;      
+      state.heroes = heroName;
     },
     randomHero: async (state, heroes) => {
       heroes = await get;
@@ -61,23 +61,22 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    getNewRandomHero: ({commit}) => commit('randomHero'),
-    setHeroes: ({ commit}, data) => commit('settingHeroes', data),
-    setSearchItem: async ({commit, dispatch}, searchItem) => {
-      commit('settingSearchItem', searchItem)
-      commit('changingLoading', true)
-      const heroes = await search(searchItem)
-      commit('changingLoading', false)
+    getNewRandomHero: ({ commit }) => commit("randomHero"),
+    setHeroes: ({ commit }, data) => commit("settingHeroes", data),
+    setSearchItem: async ({ commit, dispatch }, searchItem) => {
+      commit("settingSearchItem", searchItem);
+      commit("changingLoading", true);
+      const heroes = await search(searchItem);
+      commit("changingLoading", false);
       heroes.data?.results
         ? dispatch("setHeroes", heroes.data.results)
-        : dispatch("changeNotFound", true) && dispatch('setHeroes', [])
+        : dispatch("changeNotFound", true) && dispatch("setHeroes", []);
     },
-    getRandomHero: ({commit}, randomName) => {
-        commit('allHeroes', randomName)
-
+    getRandomHero: ({ commit }, randomName) => {
+      commit("allHeroes", randomName);
     },
-    changeLoading: ({ commit}, status) => commit('changingLoading', status),
-    changeNotFound: ({ commit}, status) => commit('changeNotFound', status),    
-  },
+    changeLoading: ({ commit }, status) => commit("changingLoading", status),
+    changeNotFound: ({ commit }, status) => commit("changeNotFound", status)
+  }
   // modules: {}
 });

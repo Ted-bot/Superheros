@@ -1,17 +1,11 @@
 <template>
-    <footer>
-        {{footerLinks}}
-    </footer>
+  <footer>
+  </footer>
 </template>
 
 <script>
-// import  from '';
 export default {
-    name: 'Footer',
-    computed: {
-        // footerLinks() {
-        //     getRoutesList(router.options.routes, 'https:/http://localhost:8080');
-        // }
-    }
-}
+  name: "Footer",
+  computed: {}
+};
 </script>
