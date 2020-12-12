@@ -1,6 +1,5 @@
 <template>
-  <div>
-
+  <div class="sm: pt-10 md:pt-0">
     <label class="block px-2 pt-1 md:px-16 md:pt-8">
       <input
         :value="searchItem"
@@ -75,8 +74,7 @@ export default {
       return this.$store.getters.getHeroes;
     },
     fetchData(someHeroes) {
-      // console.log(someHeroes._data.someHeroes);
-      return this.$store.commit("addHeroes", someHeroes._data.someHeroes);
+      return this.$store.dispatch("setAddHeroes", someHeroes._data.someHeroes);
     }
   },
   methods: {
@@ -85,12 +83,11 @@ export default {
     },
     sortList() {
       let heroesObjects = this.heroes;
-      this.$store.commit("sortHeroes", heroesObjects);
+      this.$store.dispatch("setSortHeroes", heroesObjects);
     }
   },
   mounted: function() {
     this.fetchData;
-    this.heroes;
   }
 };
 </script>

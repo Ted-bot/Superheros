@@ -40,26 +40,21 @@ export default {
   },
   computed: {
     hero() {
-      return this.$store.getters.getSingleHero;
+      return this.$store.getters.getRandomHero;
     },
     //make api request and push to state hero
     start() {
-      return this.$store.commit("randomHero");
-    },
-    //get state hero
-    randomHero() {
-      return this.$store.state.singleHero;
+      return this.$store.dispatch("setRandomHero");
     }
   },
   methods: {
     putNewHero() {
-      console.log("Hi there");
-      return this.$store.commit("randomHero");
+      //set a random hero
+      return this.$store.dispatch("setRandomHero");
     }
   },
   created: function() {
     this.start;
-    this.randomHero;
   }
 };
 </script>

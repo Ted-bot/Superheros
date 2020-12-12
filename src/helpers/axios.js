@@ -13,6 +13,6 @@ const heroesJSON = axios
 
 //export as function
 // const search is function called searchItem that takes a value for the api func
-export const search = searchItem => api(`search/${searchItem}`);
+export const searchForHero = searchItem => api(`search/${searchItem}`);
 
-export const get = heroesJSON;
+export const getHero = heroesJSON;

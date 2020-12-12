@@ -1,6 +1,6 @@
 <template>
   <div class="p-8 flex flex-wrap">
-    <div class="left w-full h-full md:w-1/4">
+    <div class="left w-full h-full sm:w-1/2 md:w-1/4">
       <h1 class="w-full text-white text-2xl font-hairline pb-2">
         {{ hero.name }}
       </h1>
@@ -10,8 +10,10 @@
         class="object-contain mb-4 rounded"
       />
     </div>
-    <div class="right w-full md:w-3/4 md:pl-4">
-      <Table class="" :content="hero.powerstats" title="Power Stats" />
+    <div class="right w-full sm:w-1/2 md:w-3/4 md:pl-4">
+      <Table class="" :content="hero.powerstats" title="Power Stats" />      
+    </div>
+    <div class="w-full md:pl-4">
       <Table class="" :content="hero.biography" title="Biography" />
     </div>
     <router-link
